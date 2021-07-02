@@ -1,0 +1,154 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #409EFF;
+}
+
+:focus {
+  outline: none;
+}
+
+// 浮动
+.clear-both::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+// 外边距
+.margin {
+  &.b15 {
+    margin-bottom: 15px;
+  }
+
+  &.l15 {
+    margin-left: 15px;
+  }
+
+  &.r15 {
+    margin-right: 15px;
+  }
+
+  &.t15 {
+    margin-top: 15px;
+  }
+
+  &.b10 {
+    margin-bottom: 10px;
+  }
+
+  &.l10 {
+    margin-left: 10px;
+  }
+
+  &.r10 {
+    margin-right: 10px;
+  }
+
+  &.t10 {
+    margin-top: 10px;
+  }
+
+  &.b5 {
+    margin-bottom: 5px;
+  }
+
+  &.l5 {
+    margin-left: 5px;
+  }
+
+  &.r5 {
+    margin-right: 5px;
+  }
+
+  &.t5 {
+    margin-top: 5px;
+  }
+
+  &.b0 {
+    margin-bottom: 0px;
+  }
+
+  &.l0 {
+    margin-left: 0px;
+  }
+
+  &.r0 {
+    margin-right: 0px;
+  }
+
+  &.t0 {
+    margin-top: 0px;
+  }
+}
+
+.width-max {
+  width: 100% !important;
+}
+
+// 页面头部 标题
+.page-heading {
+  padding-bottom: 20px;
+  position: relative;
+
+  h3 {
+    color: #49586e;
+    font-size: 25px;
+    font-weight: normal;
+    margin: 0px 0px 15px 0px;
+
+    small {
+      font-size: 55%;
+      color: #909399;
+    }
+  }
+}
+
+// 虚线水平线
+.hr-dashed {
+  height: 1px;
+  border: none;
+  border-top: 1px dashed #DCDFE6;
+}
+
+// 省略号
+.text-ellipsis {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+// 文本颜色
+.color-primary {
+  color: #409EFF;
+}
+
+.color-success {
+  color: #67C23A;
+}
+
+.color-warning {
+  color: #E6A23C;
+}
+
+.color-danger {
+  color: #F56C6C;
+}
+
+.color-info {
+  color: #909399;
+}

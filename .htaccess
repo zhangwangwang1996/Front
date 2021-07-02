@@ -1,0 +1,50 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.html [L]
+
+    # Http to https
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
+</IfModule>
+
+
+<IfModule mod_headers.c>
+  # 服务器上 gzip 压缩的 css 文件是否存在
+  # 检查客户端是否接受 gzip
+  RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+  RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+  RewriteRule "^(.*)\.css" "$1\.css\.gz" [QSA]
+
+  # 服务器上 gzip 压缩的 js 文件是否存在
+  # 检查客户端是否接受 gzip
+  RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+  RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+  RewriteRule "^(.*)\.js" "$1\.js\.gz" [QSA]
+
+
+  # Serve correct content types, and prevent mod_deflate double gzip.
+  RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
+  RewriteRule "\.js\.gz$" "-" [T=text/javascript,E=no-gzip:1]
+
+
+  <FilesMatch "(\.js\.gz|\.css\.gz)$">
+    # 提供正确的编码类型
+    Header append Content-Encoding gzip
+
+    # Force proxies to cache gzipped &
+    # non-gzipped css/js files separately.
+    Header append Vary Accept-Encoding
+  </FilesMatch>
+</IfModule>

@@ -1,0 +1,23 @@
+.exception-body {
+  background: #f9fafc;
+  overflow: auto;
+  height: 100%;
+  background-size: 100% 100%;
+  text-align: center;
+
+  .exception-code {
+    padding-top: 20vh;
+    display: block;
+    font-size: 150px;
+    line-height: 150px;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 5px 5px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .exception-message {
+    font-size: 24px;
+    padding-left: 18px;
+    width: 60%;
+  }
+}

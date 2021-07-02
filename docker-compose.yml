@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  serve:
+    image: node:12
+    volumes:
+      - .:/app
+    environment:
+      RUN_SERVER_HOST: 0.0.0.0
+    ports:
+      - ${RUN_SERVER_PORT}:${RUN_SERVER_PORT}
+    command: ["/bin/bash", "-c", "cd /app && bash docker/npm-config-registry.sh && npm install --no-optional && npm run dev"]
+
+  build:
+    build: .
+    ports:
+      - 2${RUN_SERVER_PORT}:80
+    environment:
+      VUE_APP_NAME: ${VUE_APP_NAME} Docker
+      RUN_SERVER_PORT: ${RUN_SERVER_PORT}
+      RUN_SERVER_HOST: ${RUN_SERVER_HOST}

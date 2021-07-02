@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+  <meta charset="utf-8">
+  <title><%= process.env.VUE_APP_NAME %></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="128x128" href="<%= htmlWebpackPlugin.files.publicPath %>static/icons/icon-128x128.png">
+  <link rel="icon" type="image/png" sizes="72x72" href="<%= htmlWebpackPlugin.files.publicPath %>static/icons/icon-72x72.png">
+  <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.png"><![endif]-->
+  <!-- Add to home screen for Android and modern mobile browsers -->
+  <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
+  <meta name="theme-color" content="#2d2f33">
+
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="<%= process.env.APP_NAME %>">
+  <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/icons/icon-152x152.png">
+  <!-- Add to home screen for Windows -->
+  <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2d2f33">
+  <!-- chunk 预载 -->
+  <% for (var chunk of webpack.chunks) {
+  for (var file of chunk.files) {
+  if (file.match(/\.(js)$/)) { %>
+  <link rel="<%= chunk.initial?'preload':'prefetch' %>"
+        href="<%= htmlWebpackPlugin.files.publicPath + file %>"
+        as="<%= file.match(/\.css$/)?'style':'script' %>">
+  <% } else if (file.match(/\.(css)$/)) { %>
+  <link rel="<%= chunk.initial?'preload':'prefetch' %>"
+        href="<%= htmlWebpackPlugin.files.publicPath + file %>"
+        as="<%= file.match(/\.css$/)?'style':'script' %>"
+        onload="this.onload=null;this.rel='stylesheet';window.STYLE_READY=1;window.mountApp&&window.mountApp();">
+  <% }}} %>
+
+  <!-- CDN -->
+  <% if (htmlWebpackPlugin.options.cdn) {
+  for (var file of htmlWebpackPlugin.options.cdn) { %>
+  <link rel="preload"
+        href="<%= file %>"
+        as="<%= file.match(/\.css$/)?'style':'script' %>">
+  <% }} %>
+
+  <!-- dll -->
+  <% if (htmlWebpackPlugin.options.dll) {
+  for (var file of htmlWebpackPlugin.options.dll) {
+  if (file.match(/\.(js)$/)) { %>
+  <link rel="preload" href="<%= file %>" as="script">
+  <% } else if (file.match(/\.(css)$/)) { %>
+  <link rel="preload" href="<%= file %>" as="style"
+        onload="this.onload=null;this.rel='stylesheet';">
+  <% }}} %>
+
+</head>
+<body style="background: radial-gradient(ellipse at bottom,#2d2f33 0,#191919 100%);">
+<!-- loadCSS. [c]2017 Filament Group, Inc. MIT License -->
+<%= htmlWebpackPlugin.options.cssLoader %>
+<noscript>
+  This is your fallback content in case JavaScript fails to load.
+</noscript>
+<div id="app"></div>
+<!-- 需要动态变更的环境参数 -->
+<script type=text/javascript id=app-env-script></script>
+
+<!-- Todo: only include in production -->
+<%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+<!-- built files will be auto injected -->
+
+<!-- CDN -->
+<% if (htmlWebpackPlugin.options.cdn) {
+for (var file of htmlWebpackPlugin.options.cdn) { %>
+<script type="text/javascript" src="<%= file %>"></script>
+<% }} %>
+
+<!-- DLL -->
+<% if (htmlWebpackPlugin.options.dll) {
+for (var file of htmlWebpackPlugin.options.dll) {
+if (file.match(/\.(js)$/)) { %>
+<script type="text/javascript" src="<%= file %>"></script>
+<% }}} %>
+</body>
+
+</html>

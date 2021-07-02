@@ -1,0 +1,81 @@
+// 下拉列表
+.el-select-dropdown__item {
+  .info {
+    color: rgb(132, 146, 166);
+    font-size: 10px;
+  }
+}
+
+// 隐藏 Badge 标记的边线
+.el-badge.border-none .el-badge__content {
+  border: none;
+}
+
+// el-message-box 弹框时的内容自动换行
+.el-message-box__message p {
+  word-wrap: break-word;
+}
+
+// router-link 包裹 el-button
+// .el-button + a, a + .el-button {
+//   margin-left: 10px;
+// }
+
+// 详情页使用 el-form 显示适当的列表
+.re-el-form__detial {
+  .el-form-item {
+    margin-bottom: 0px;
+  }
+}
+
+// 表单的区间
+.re-el-form__interval {
+  .el-form-item {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .el-col.el-col-2 {
+    text-align: center;
+  }
+}
+
+// 表单 flex 布局，用于搜索
+.re-el-form__flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -20px;
+
+  & > .el-form-item {
+    width: 530px;
+
+    &.medium {
+      width: 530px;
+    }
+
+    &.small {
+      width: 405px;
+    }
+
+    &.mini {
+      width: 325px;
+    }
+
+    margin-left: 20px;
+  }
+
+  & > .medium {
+    width: 530px;
+    margin-left: 20px;
+  }
+
+  & > .small {
+    width: 405px;
+    margin-left: 20px;
+  }
+
+  & > .mini {
+    width: 325px;
+    margin-left: 20px;
+  }
+}

@@ -1,0 +1,17 @@
+/**
+ * 字体矢量图标
+ * http://iconfont.cn/
+ */
+@import url("//at.alicdn.com/t/font_873772_i6vi5901px.css");
+
+[class^="sj-icon-"], [class*=" sj-icon-"] {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+}
+
+.el-button [class*="sj-icon-"] + span {
+  margin-left: 5px;
+}
